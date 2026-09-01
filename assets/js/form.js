@@ -76,3 +76,51 @@
             // Jalankan preview pertama kali saat aplikasi dibuka
             updatePreview();
         });
+
+// FUNGSI GENERATE PDF TANPA BROWSER PRINT (FIX IPHONE)
+function generatePDF() {
+    const element = document.querySelector('.paper');
+    const btn = document.querySelector('.btn-print');
+    
+    // Ambil nama untuk nama file
+    const pendaftar = document.getElementById('inputPendaftar').value || "Klien";
+    const klien = document.getElementById('inputKlien').value || pendaftar;
+    const filename = "Surat_Konfirmasi_" + klien.replace(/\s+/g, '_') + ".pdf";
+
+    const opt = {
+        margin:       0,
+        filename:     filename,
+        image:        { type: 'jpeg', quality: 1 },
+        html2canvas:  { scale: 2, useCORS: true, windowWidth: 793 }, // 793px = 210mm width approx
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+
+    // Reset style paper sementara
+    const oldTransform = element.style.transform;
+    const oldShadow = element.style.boxShadow;
+    const oldMargin = element.style.marginBottom;
+    
+    element.style.transform = 'scale(1)';
+    element.style.boxShadow = 'none';
+    element.style.marginBottom = '0';
+    
+    btn.innerText = "Memproses PDF...";
+    btn.disabled = true;
+
+    html2pdf().set(opt).from(element).save().then(() => {
+        // Kembalikan style semula
+        element.style.transform = oldTransform;
+        element.style.boxShadow = oldShadow;
+        element.style.marginBottom = oldMargin;
+        
+        btn.innerText = "Cetak / Simpan PDF";
+        btn.disabled = false;
+    }).catch(err => {
+        alert("Gagal memproses PDF.");
+        element.style.transform = oldTransform;
+        element.style.boxShadow = oldShadow;
+        element.style.marginBottom = oldMargin;
+        btn.innerText = "Cetak / Simpan PDF";
+        btn.disabled = false;
+    });
+}

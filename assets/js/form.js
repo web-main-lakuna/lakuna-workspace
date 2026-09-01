@@ -82,45 +82,73 @@ function generatePDF() {
     const element = document.querySelector('.paper');
     const btn = document.querySelector('.btn-print');
     
-    // Ambil nama untuk nama file
-    const pendaftar = document.getElementById('inputPendaftar').value || "Klien";
-    const klien = document.getElementById('inputKlien').value || pendaftar;
-    const filename = "Surat_Konfirmasi_" + klien.replace(/\s+/g, '_') + ".pdf";
+        // Ambil nama untuk nama file dari Nama Pendaftar
+    let pendaftar = document.getElementById('inputPendaftar').value.trim();
+    if (!pendaftar) {
+        pendaftar = "Klien";
+    }
+    // Bersihkan karakter khusus yang tidak bisa jadi nama file, lalu ganti spasi jadi underscore
+    const safeName = pendaftar.replace(/[^a-zA-Z0-9 ]/g, "").trim().replace(/\s+/g, '_');
+    const filename = "Surat_Konfirmasi_" + safeName + ".pdf";
+
+    // Simpan posisi scroll & style lama agar bisa dikembalikan mulus
+    const scrollPos = window.scrollY;
+    const oldTransform = element.style.transform;
+    const oldShadow = element.style.boxShadow;
+    const oldMargin = element.style.marginBottom;
+    const oldHeight = element.style.height;
+    
+    const oldBodyWidth = document.body.style.width;
+    const oldHtmlWidth = document.documentElement.style.width;
+
+    // PAKSA LAYAR MENJADI DESKTOP (1200px) SEMENTARA (0.2 detik)
+    // Ini memastikan kertas tidak terpotong (overflow) oleh layar HP yang sempit!
+    document.documentElement.style.width = '1200px';
+    document.body.style.width = '1200px';
+
+    // Paksa ukuran kertas murni 100% A4
+    element.style.setProperty('transform', 'scale(1)', 'important');
+    element.style.setProperty('box-shadow', 'none', 'important');
+    element.style.setProperty('margin-bottom', '0', 'important');
+    element.style.setProperty('height', '296mm', 'important'); // Cegah halaman ke-2 kosong
 
     const opt = {
         margin:       0,
         filename:     filename,
         image:        { type: 'jpeg', quality: 1 },
-        html2canvas:  { scale: 2, useCORS: true, windowWidth: 793 }, // 793px = 210mm width approx
+        html2canvas:  { scale: 2, useCORS: true, scrollY: 0 }, 
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
     };
 
-    // Reset style paper sementara
-    const oldTransform = element.style.transform;
-    const oldShadow = element.style.boxShadow;
-    const oldMargin = element.style.marginBottom;
-    
-    element.style.transform = 'scale(1)';
-    element.style.boxShadow = 'none';
-    element.style.marginBottom = '0';
-    
     btn.innerText = "Memproses PDF...";
     btn.disabled = true;
 
-    html2pdf().set(opt).from(element).save().then(() => {
-        // Kembalikan style semula
-        element.style.transform = oldTransform;
-        element.style.boxShadow = oldShadow;
-        element.style.marginBottom = oldMargin;
-        
-        btn.innerText = "Cetak / Simpan PDF";
-        btn.disabled = false;
-    }).catch(err => {
-        alert("Gagal memproses PDF.");
-        element.style.transform = oldTransform;
-        element.style.boxShadow = oldShadow;
-        element.style.marginBottom = oldMargin;
-        btn.innerText = "Cetak / Simpan PDF";
-        btn.disabled = false;
-    });
+    // Tunggu 0.2 detik agar browser selesai menggambar layar raksasa sebelum difoto
+    setTimeout(() => {
+        html2pdf().set(opt).from(element).save().then(() => {
+            // Restore semuanya kembali normal (Mobile Mode)
+            document.documentElement.style.width = oldHtmlWidth;
+            document.body.style.width = oldBodyWidth;
+            element.style.transform = oldTransform;
+            element.style.boxShadow = oldShadow;
+            element.style.marginBottom = oldMargin;
+            element.style.height = oldHeight;
+            
+            window.scrollTo(0, scrollPos); // Kembalikan posisi scroll
+
+            btn.innerText = "Cetak / Simpan PDF";
+            btn.disabled = false;
+        }).catch(err => {
+            console.error("Error PDF:", err);
+            // Restore jika error
+            document.documentElement.style.width = oldHtmlWidth;
+            document.body.style.width = oldBodyWidth;
+            element.style.transform = oldTransform;
+            element.style.height = oldHeight;
+            alert("Gagal mencetak. Silakan refresh dan coba lagi.");
+            btn.innerText = "Cetak / Simpan PDF";
+            btn.disabled = false;
+        });
+    }, 200);
 }
+

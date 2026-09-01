@@ -168,7 +168,8 @@
             color: var(--lakuna-dark-purple);
             font-size: 13pt;
             font-weight: 800;
-            margin-bottom: 10px;
+            margin-top: -15px;
+            margin-bottom: 25px;
             letter-spacing: 0.5px;
             position: relative;
             z-index: 2;
@@ -204,6 +205,7 @@
         }
 
         .tgl-surat {
+            margin-top: -25px;
             text-align: right;
             margin-bottom: 35px;
         }
@@ -276,17 +278,10 @@
             html, body {
                 display: block !important;
                 width: 100% !important;
-                height: auto !important;
-                min-height: 297mm !important;
+                height: 100% !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 background: white !important;
-                overflow: visible !important;
-            }
-
-            /* Hancurkan elemen luar */
-            body > *:not(#preview-area) {
-                display: none !important;
             }
 
             #sidebar, .no-print {
@@ -296,7 +291,6 @@
             #preview-area {
                 display: block !important;
                 width: 100% !important;
-                height: auto !important;
                 margin: 0 !important;
                 padding: 0 !important;
             }
@@ -304,14 +298,13 @@
             .paper {
                 display: block !important;
                 width: 210mm !important;
-                height: 297mm !important;
-                margin: 0 !important;
+                height: 296mm !important; /* Kurangi 1mm agar tidak tumpah ke halaman 2 */
+                margin: 0 auto !important;
                 padding: 0 !important;
                 box-shadow: none !important;
                 border: none !important;
-                transform: none !important;
+                transform: none !important; /* Reset scale */
                 page-break-after: avoid !important;
-                page-break-before: avoid !important;
                 page-break-inside: avoid !important;
             }
 
@@ -368,6 +361,13 @@
                 margin-bottom: -172.26mm; /* 297 * 0.58 */
             }
         }
+
+
+
+
+
+
+
 
 
 

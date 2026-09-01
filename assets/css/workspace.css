@@ -13,6 +13,8 @@
         }
 
         body {
+            -webkit-text-size-adjust: 100%;
+            min-height: -webkit-fill-available;
             font-family: var(--poppins);
             background: linear-gradient(135deg, #f4f7f6 0%, #e8edf1 100%);
             min-height: 100vh;
@@ -263,13 +265,9 @@
                 margin-right: -5px;
             }
 
-            .brand-title {
-                font-size: 1.15rem;
-            }
+            .brand-title { font-size: 1.05rem; white-space: nowrap; }
 
-            .brand-subtitle {
-                font-size: 0.8rem;
-            }
+            .brand-subtitle { font-size: 0.75rem; }
 
             .main {
                 padding: 20px 15px;
@@ -296,4 +294,9 @@
                 padding: 25px 20px;
             }
         }
+
+
+
+
+
 

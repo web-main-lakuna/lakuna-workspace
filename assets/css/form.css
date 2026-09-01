@@ -1,3 +1,14 @@
+/* ==============================================================
+   NUCLEAR APPLE RESET - PAKSA IPHONE TUNDUK PADA DESAIN KITA
+   ============================================================== */
+* {
+    -webkit-tap-highlight-color: transparent !important; /* Hilangkan efek kedip abu-abu saat tombol/link disentuh */
+}
+input, textarea, button, select {
+    -webkit-appearance: none;
+    border-radius: 0; /* Reset paksa border bulat khas Apple */
+}
+/* ============================================================== */
         :root {
             --poppins: 'Poppins', sans-serif;
             --lakuna-purple: #6a1b9a;
@@ -264,7 +275,7 @@
         }
 
         .footer-sig .admin {
-            margin-top: 90px;
+            margin-top: 55px; /* Didekatkan ke atas sedikit */
         }
 
         @media print {
@@ -358,6 +369,8 @@
                 margin-bottom: -172.26mm; /* 297 * 0.58 */
             }
         }
+
+
 
 
 

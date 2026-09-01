@@ -255,12 +255,12 @@
             }
 
             .brand img {
-                height: 120px; /* sedikit disesuaikan agar pas bersebelahan dengan teks */
-                margin-top: -35px;
-                margin-bottom: -35px;
-                clip-path: inset(35px 0 35px 0);
-                margin-left: -10px;
-                margin-right: 0;
+                height: 170px;
+                margin-top: -50px;
+                margin-bottom: -50px;
+                clip-path: inset(50px 0 50px 0);
+                margin-left: -20px;
+                margin-right: -5px;
             }
 
             .brand-title {
@@ -296,3 +296,4 @@
                 padding: 25px 20px;
             }
         }
+

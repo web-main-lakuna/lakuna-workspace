@@ -71,6 +71,8 @@
         input,
         select {
             width: 100%;
+            font-size: 16px; /* Wajib 16px untuk mencegah Auto-Zoom di iPhone Safari */
+            -webkit-appearance: none; /* Merapikan border bawaan iPhone */
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 6px;
@@ -254,33 +256,40 @@
             @page {
                 size: A4;
                 margin: 0;
-                /* Margin diatur dari padding .paper-content */
             }
 
-            body {
+            html, body {
+                height: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
                 background: white;
+                overflow: hidden !important;
             }
 
-            /* Sembunyikan form kiri saat cetak */
             #sidebar {
                 display: none !important;
             }
 
             #preview-area {
-                padding: 0;
-                display: block;
-                overflow: visible;
+                padding: 0 !important;
+                margin: 0 !important;
+                display: block !important;
+                height: 100% !important;
+                overflow: hidden !important;
             }
 
-            /* Hilangkan bayangan & batas area web */
             .paper {
-                box-shadow: none;
-                width: 100%;
-                height: auto;
-                transform: none !important; /* Reset scale saat di print */
+                box-shadow: none !important;
+                width: 100% !important;
+                height: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                transform: none !important;
+                page-break-after: avoid !important;
+                page-break-before: avoid !important;
+                border: none !important;
             }
 
-            /* Paksa browser mencetak warna persis sama (untuk teks ungu) */
             * {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
@@ -332,3 +341,5 @@
                 margin-bottom: -172.26mm; /* 297 * 0.58 */
             }
         }
+
+

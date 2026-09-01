@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Lakuna Workspace - Internal Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/workspace.css">
+</head>
+<body>
+
+    <!-- Header Portal -->
+    <header class="header">
+        <div class="brand">
+            <img src="logo-lakuna-header.png" alt="Lakuna Logo">
+            <div class="brand-text">
+                <span class="brand-title">LAKUNA WORKSPACE</span>
+                <span class="brand-subtitle">Internal Portal</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="welcome-section">
+            <h1>Selamat Datang di Lakuna Workspace</h1>
+            <p>Pilih alat kerja yang anda butuhkan. Semua data diproses langsung di perangkat anda sehingga data klien terjamin kerahasiaannya.</p>
+        </div>
+
+        <div class="tools-grid">
+            <!-- Tool 1: Form Konfirmasi -->
+            <!-- Kartu Tool 1 -->
+            <div class="card">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+                </div>
+                <h2 class="card-title">Surat Konfirmasi</h2>
+                <p class="card-desc">Generator pembuat surat konfirmasi jadwal layanan psikologi untuk klien dengan format PDF resmi Lakuna.</p>
+                <a href="form-lakuna.html" class="card-btn">
+                    Buka Tool
+                    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+                </a>
+            </div>
+
+            <!-- Placeholder untuk tools berikutnya -->
+            <div class="card disabled">
+                <div class="card-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+                </div>
+                <h2 class="card-title">Tool Baru (Segera)</h2>
+                <p class="card-desc">Modul untuk kebutuhan administrasi lainnya akan ditambahkan di sini secara bertahap pada pengembangan berikutnya.</p>
+                <div class="card-btn">Segera Hadir</div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Script untuk menyembunyikan header saat scroll ke bawah di mobile
+        let lastScrollY = window.scrollY;
+        const header = document.querySelector('.header');
+
+        window.addEventListener('scroll', () => {
+            // Hanya jalankan efek ini pada tampilan mobile
+            if (window.innerWidth <= 768) {
+                if (window.scrollY > lastScrollY && window.scrollY > 50) {
+                    // Scroll ke bawah: sembunyikan header
+                    header.style.transform = 'translateY(-100%)';
+                } else {
+                    // Scroll ke atas: munculkan kembali header
+                    header.style.transform = 'translateY(0)';
+                }
+            } else {
+                // Pastikan header selalu tampil di desktop
+                header.style.transform = 'translateY(0)';
+            }
+            lastScrollY = window.scrollY;
+        });
+    </script>
+</body>
+</html>

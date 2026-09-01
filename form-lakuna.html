@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Generator Surat Konfirmasi - Lakuna Psikologi</title>
+    <!-- Memanggil Font Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/form.css">
+</head>
+
+<body>
+
+    <!-- SIDEBAR FORM KIRI -->
+    <div id="sidebar" class="no-print">
+        <a href="index.html" class="btn-back">
+            <svg viewBox="0 0 24 24">
+                <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+            </svg>
+            Kembali ke Portal
+        </a>
+        <h2>Data Administrasi</h2>
+
+        <div class="form-group">
+            <label>Tanggal Terbit Surat</label>
+            <input type="date" id="inputTglSurat">
+        </div>
+
+        <div class="form-group">
+            <label>Jenis Kelamin Pendaftar</label>
+            <select id="inputGender">
+                <option value="Perempuan">Perempuan (Ibu)</option>
+                <option value="Laki-laki">Laki-laki (Bapak)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Nama Pendaftar (Username)</label>
+            <input type="text" id="inputPendaftar" placeholder="Contoh: Rasyidan Maula">
+        </div>
+
+        <div class="form-group">
+            <label>Nama Klien / Anak (Opsional)</label>
+            <input type="text" id="inputKlien" placeholder="Isi jika pendaftar mendaftarkan orang lain">
+            <span class="help-text">*Kosongkan jika Klien adalah Pendaftar itu sendiri</span>
+        </div>
+
+        <div class="form-group">
+            <label>Nomor Kontak (WhatsApp)</label>
+            <input type="text" id="inputKontak" placeholder="Contoh: 081233445566">
+        </div>
+
+        <div class="form-group">
+            <label>Layanan Psikologi</label>
+            <select id="inputLayanan">
+                <option value="" disabled selected>Pilih Layanan...</option>
+                <option value="Konseling">Konseling</option>
+                <option value="Psikotes">Psikotes</option>
+                <option value="Tes Minat Bakat">Tes Minat Bakat</option>
+                <option value="Coaching Hero">Coaching Hero</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Tanggal Janji Temu</label>
+            <input type="date" id="inputTglJanji">
+        </div>
+
+        <div class="form-group">
+            <label>Waktu Janji Temu</label>
+            <input type="text" id="inputWaktu" placeholder="Contoh: 11:00 - 12:30">
+        </div>
+
+        <div class="form-group">
+            <label>Psikolog Pemeriksa</label>
+            <select id="inputPsikolog">
+                <option value="" disabled selected>Pilih Psikolog...</option>
+                <option value="Dr. Mira Tripuspita, S.Psi, M.Com (HRM), Psikolog">Dr. Mira Tripuspita</option>
+                <option value="Siska Febrianti Setya Putri M.Psi., Psikolog">Siska Febrianti</option>
+                <option value="Rasyid Tri Budimansyah S.Psi.">Rasyid Tri Budimansyah</option>
+            </select>
+        </div>
+
+        <button class="btn-print" onclick="window.print()">Cetak / Simpan PDF</button>
+    </div>
+
+    <!-- AREA PREVIEW SURAT KANAN -->
+    <div id="preview-area">
+        <div class="paper">
+
+            <!-- Area Header Custom -->
+            <div class="custom-header">
+                <div class="header-logo">
+                    <img src="logo-lakuna-header.png" alt="Logo Lakuna Psikologi">
+                </div>
+                <div class="header-tagline">
+                    PSIKOEDUKASI &ndash; PENGENALAN DIRI &ndash; INTERVENSI
+                </div>
+                <div class="header-contact-bar">
+                    <div class="contact-item">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                        </svg>
+                        <span>+62 811-1464-081</span>
+                    </div>
+                    <div class="contact-item">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                        </svg>
+                        <span>lakunapsikologi@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                        </svg>
+                        <span>@lakunapsikologi</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Konten Surat -->
+            <div class="paper-content">
+                <div class="tgl-surat" id="outTglSurat">Tangerang Selatan, ...</div>
+
+                <div class="yth-title" id="outYth">Yth. Ibu ...</div>
+
+                <p>Terima kasih telah memilih <span class="purple-text">Lakuna Psikologi</span> sebagi partner Anda.</p>
+
+                <p>Kami telah menerima pendaftaran Layanan Psikologi dan Pembayaran atas nama <span class="bold"
+                        id="outNamaPasien">...</span> Cp. <span class="bold" id="outKontak">...</span> untuk <span
+                        class="bold outLayanan">...</span>.</p>
+
+                <p>Bersama ini kami sampaikan jadwal <span class="bold outLayanan">...</span> yang akan dilaksanakan
+                    pada :</p>
+
+                <table class="tabel-jadwal">
+                    <tr>
+                        <td class="col-label">Jadwal</td>
+                        <td class="col-colon">:</td>
+                        <td class="bold" id="outJadwal">...</td>
+                    </tr>
+                    <tr>
+                        <td class="col-label">Waktu</td>
+                        <td class="col-colon">:</td>
+                        <td class="bold" id="outWaktu">... WIB</td>
+                    </tr>
+                    <tr>
+                        <td class="col-label">Lokasi</td>
+                        <td class="col-colon">:</td>
+                        <td>Jl. Puri Jelita blok PB 39 / 36, Bintaro Jaya sektor 9,<br>Tangsel, Banten 15412</td>
+                    </tr>
+                    <tr>
+                        <td class="col-label">Peta Lokasi</td>
+                        <td class="col-colon">:</td>
+                        <td><i>https://maps.app.goo.gl/5yCgMgx4KfRVFMXv8?g_st=ic</i></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="padding: 10px 0;"></td>
+                    </tr>
+                    <tr>
+                        <td class="col-label">Psikolog Pemeriksa</td>
+                        <td class="col-colon">:</td>
+                        <td class="bold" id="outPsikolog">...</td>
+                    </tr>
+                    <tr>
+                        <td class="col-label">Layanan Psikologi</td>
+                        <td class="col-colon">:</td>
+                        <td class="bold outLayanan">...</td>
+                    </tr>
+                    <tr>
+                        <td class="col-label">Status Pembayaran</td>
+                        <td class="col-colon">:</td>
+                        <td class="bold">Lunas</td>
+                    </tr>
+                </table>
+
+                <p style="white-space: nowrap;">Harapan kami Layanan Psikologi yang kami berikan sesuai dengan kebutuhan
+                    anda.</p>
+
+                <div class="footer-sig">
+                    <div>Caring with Heart</div>
+                    <div class="admin">Admin Lakuna Psikologi</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOGIKA JAVASCRIPT -->
+    <script src="assets/js/form.js"></script>
+</body>
+
+</html>

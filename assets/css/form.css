@@ -1,0 +1,334 @@
+        :root {
+            --poppins: 'Poppins', sans-serif;
+            --lakuna-purple: #6a1b9a;
+            --lakuna-dark-purple: #4a148c;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--poppins);
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f9;
+            display: flex;
+            height: 100vh;
+        }
+
+        /* --- TAMPILAN UI FORM (KIRI) --- */
+        #sidebar {
+            width: 420px;
+            background: #ffffff;
+            padding: 25px;
+            border-right: 1px solid #ddd;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+            z-index: 10;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #666;
+            font-size: 10pt;
+            font-weight: bold;
+            margin-bottom: 25px;
+            transition: 0.2s;
+        }
+
+        .btn-back:hover {
+            color: var(--lakuna-purple);
+        }
+
+        .btn-back svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        h2 {
+            font-size: 16pt;
+            margin-top: 0;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 10pt;
+            color: #444;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-family: inherit;
+            background: #fafafa;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--lakuna-purple);
+            outline: none;
+        }
+
+        .help-text {
+            font-size: 8.5pt;
+            color: #777;
+            margin-top: 4px;
+            display: block;
+        }
+
+        .btn-print {
+            width: 100%;
+            background: var(--lakuna-purple);
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 12pt;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.2s;
+        }
+
+        .btn-print:hover {
+            background: var(--lakuna-dark-purple);
+        }
+
+        /* --- TAMPILAN PREVIEW SURAT (KANAN) --- */
+        #preview-area {
+            flex-grow: 1;
+            padding: 20px;
+            overflow: hidden; /* Hilangkan scrollbar */
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .paper {
+            background: white;
+            width: 210mm;
+            /* Ukuran A4 */
+            height: 297mm; /* Kunci ukuran tinggi */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            position: relative;
+            transform-origin: top center; /* Untuk scaling JS */
+            overflow: hidden; /* Menyembunyikan bagian logo yang keluar dari batas kertas */
+        }
+
+        /* Custom Header Styling */
+        .custom-header {
+            width: 100%;
+            text-align: center;
+            padding-top: 0px;
+        }
+
+        .header-logo img {
+            max-height: 420px;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+            margin-top: -140px;
+            margin-bottom: -150px;
+            mix-blend-mode: multiply;
+        }
+
+        .header-tagline {
+            color: var(--lakuna-dark-purple);
+            font-size: 13pt;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-contact-bar {
+            background: linear-gradient(90deg, #7dbd1e 0%, #ef8500 100%);
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 12px 20px;
+            color: white;
+            font-size: 11pt;
+            font-weight: 500;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-item svg {
+            width: 18px;
+            height: 18px;
+            fill: white;
+        }
+
+        .paper-content {
+            padding: 15mm 20mm 15mm 20mm;
+            font-size: 12pt;
+            color: #000;
+        }
+
+        .tgl-surat {
+            text-align: right;
+            margin-bottom: 35px;
+        }
+
+        .yth-title {
+            font-size: 14pt;
+            /* Khusus Yth Size 14 */
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        /* Warna Ungu Asli bawaan desain */
+        .purple-text {
+            color: var(--lakuna-purple);
+            font-weight: bold;
+        }
+
+        .tabel-jadwal {
+            margin-bottom: 35px;
+            border-collapse: collapse;
+            font-size: 11pt; /* Font sedikit dikecilkan agar lebih muat */
+        }
+
+        .tabel-jadwal td {
+            padding: 5px 10px;
+            vertical-align: top;
+            white-space: nowrap;
+        }
+
+        /* Khusus kolom ke-3 (isi data) diizinkan turun ke bawah agar margin A4 tetap aman */
+        .tabel-jadwal td:nth-child(3) {
+            white-space: normal;
+            word-break: break-word;
+        }
+
+        .col-label {
+            width: 170px;
+        }
+
+        .col-colon {
+            width: 15px;
+            text-align: center;
+        }
+
+        .footer-sig {
+            margin-top: 60px;
+            color: var(--lakuna-dark-purple);
+            font-weight: bold;
+        }
+
+        .footer-sig .admin {
+            margin-top: 90px;
+        }
+
+        @media print {
+            @page {
+                size: A4;
+                margin: 0;
+                /* Margin diatur dari padding .paper-content */
+            }
+
+            body {
+                background: white;
+            }
+
+            /* Sembunyikan form kiri saat cetak */
+            #sidebar {
+                display: none !important;
+            }
+
+            #preview-area {
+                padding: 0;
+                display: block;
+                overflow: visible;
+            }
+
+            /* Hilangkan bayangan & batas area web */
+            .paper {
+                box-shadow: none;
+                width: 100%;
+                height: auto;
+                transform: none !important; /* Reset scale saat di print */
+            }
+
+            /* Paksa browser mencetak warna persis sama (untuk teks ungu) */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+
+        /* --- RESPONSIVE MOBILE --- */
+        @media screen and (max-width: 768px) {
+            body {
+                flex-direction: column;
+                height: auto;
+                overflow-x: hidden;
+            }
+
+            #preview-area {
+                width: 100%;
+                order: -1; /* Pindahkan preview ke bagian paling atas */
+                padding: 25px 0; /* Gap atas dan bawah seimbang */
+                display: flex;
+                justify-content: center; /* Pastikan center horizontal */
+                align-items: flex-start;
+                overflow: hidden;
+            }
+
+            #sidebar {
+                width: 100%;
+                max-height: none;
+                border-right: none;
+                border-top: 2px solid var(--lakuna-purple);
+                padding: 25px 20px; /* Gap yang konsisten */
+            }
+
+            /* Kembalikan ke bentuk A4 asli, lalu di-skala (diperkecil) */
+            .paper {
+                flex-shrink: 0; /* Mencegah kertas menjadi gepeng */
+                width: 210mm;
+                height: 297mm;
+                transform: scale(0.45); /* Ukuran ideal muat di berbagai tipe HP */
+                transform-origin: top center;
+                margin-bottom: -163.35mm; /* (297 * 0.55) Menghilangkan ruang kosong bawah akibat skala */
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+                border-radius: 0;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .paper {
+                transform: scale(0.42); /* Skala ideal untuk HP pada umumnya */
+                margin-bottom: -172.26mm; /* 297 * 0.58 */
+            }
+        }

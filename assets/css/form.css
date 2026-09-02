@@ -208,6 +208,12 @@ select:focus {
     fill: white;
 }
 
+.contact-item a,
+.contact-item span {
+    text-decoration: none !important;
+    color: inherit;
+}
+
 .paper-content {
     padding: 15mm 18mm 15mm 18mm;
     font-size: 12pt;

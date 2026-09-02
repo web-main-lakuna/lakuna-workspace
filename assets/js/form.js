@@ -146,7 +146,8 @@ function generatePDF() {
             height: 1123,
             windowWidth: 794
         },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        enableLinks: true
     };
 
     // === LANGKAH 5: Tunggu browser merender clone, lalu tangkap ===

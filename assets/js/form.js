@@ -81,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Strategi: Clone kertas ke kontainer position:fixed di koordinat (0,0) viewport.
 // Ini menjamin html2canvas SELALU mendapat elemen di posisi (0,0),
 // tidak terpengaruh sidebar, flex-center, atau scale apapun.
+// Container diletakkan di z-index:-1 (di belakang semua konten) sehingga tidak terlihat.
 function generatePDF() {
     var originalPaper = document.querySelector('.paper');
     var btn = document.querySelector('.btn-print');
@@ -94,33 +95,25 @@ function generatePDF() {
     btn.innerText = "Memproses...";
     btn.disabled = true;
 
-    // === LANGKAH 1: Buat Loading Overlay (paling depan, menutupi layar) ===
-    var overlay = document.createElement('div');
-    overlay.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;' +
-        'background:rgba(255,255,255,0.97);z-index:999999;display:flex;' +
-        'flex-direction:column;justify-content:center;align-items:center;';
-    overlay.innerHTML = '<h2 style="color:#6a1b9a;margin-bottom:10px;">Memproses Dokumen PDF...</h2>' +
-        '<p style="color:#555;">Mohon tunggu sebentar.</p>';
-    document.body.appendChild(overlay);
-
-    // === LANGKAH 2: Buat Print Container (di belakang overlay, tapi di depan konten asli) ===
+    // === LANGKAH 1: Buat Print Container tersembunyi di belakang konten ===
     // position:fixed top:0 left:0 menjamin posisi di koordinat viewport (0,0).
-    // z-index di bawah overlay agar tertutup, tapi html2canvas tetap bisa membacanya.
+    // z-index:-1 menyembunyikannya di belakang semua konten halaman (tidak terlihat user).
+    // html2canvas membaca DOM, bukan pixel layar, jadi tetap bisa merender elemen ini.
     var printContainer = document.createElement('div');
     printContainer.style.cssText = 'position:fixed;top:0;left:0;' +
-        'width:210mm;height:297mm;z-index:999998;background:white;' +
-        'margin:0;padding:0;overflow:hidden;';
+        'width:210mm;height:297mm;z-index:-1;background:white;' +
+        'margin:0;padding:0;overflow:hidden;border:none;outline:none;box-shadow:none;';
 
-    // === LANGKAH 3: Clone kertas asli dan reset SEMUA style via inline ===
+    // === LANGKAH 2: Clone kertas asli dan reset SEMUA style via inline ===
     var clonedPaper = originalPaper.cloneNode(true);
     clonedPaper.style.cssText = 'transform:none !important;-webkit-transform:none !important;' +
         'width:210mm !important;height:297mm !important;max-height:297mm !important;' +
         'margin:0 !important;padding:0 !important;box-shadow:none !important;' +
         'overflow:hidden !important;position:relative !important;' +
-        'flex-shrink:0 !important;box-sizing:border-box !important;';
+        'flex-shrink:0 !important;box-sizing:border-box !important;' +
+        'border:none !important;outline:none !important;';
 
-    // === LANGKAH 4: Perbaiki elemen-elemen dalam clone secara inline ===
-    // (Tidak bergantung pada onclone CSS yang kadang tidak konsisten)
+    // === LANGKAH 3: Perbaiki elemen-elemen dalam clone secara inline ===
     var bar = clonedPaper.querySelector('.header-contact-bar');
     if (bar) bar.style.gap = '40px';
 
@@ -137,7 +130,7 @@ function generatePDF() {
     printContainer.appendChild(clonedPaper);
     document.body.appendChild(printContainer);
 
-    // === LANGKAH 5: Konfigurasi html2pdf ===
+    // === LANGKAH 4: Konfigurasi html2pdf ===
     var opt = {
         margin: 0,
         filename: filename,
@@ -147,20 +140,20 @@ function generatePDF() {
             useCORS: true,
             scrollX: 0,
             scrollY: 0,
-            x: 0,      // Paksa mulai dari koordinat X=0
-            y: 0,      // Paksa mulai dari koordinat Y=0
-            width: 794, // Lebar tangkapan = 210mm dalam pixel
-            height: 1123, // Tinggi tangkapan = 297mm dalam pixel
+            x: 0,
+            y: 0,
+            width: 794,
+            height: 1123,
             windowWidth: 794
         },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
     };
 
-    // === LANGKAH 6: Tunggu browser merender clone, lalu tangkap ===
+    // === LANGKAH 5: Tunggu browser merender clone, lalu tangkap ===
     setTimeout(function () {
         html2pdf()
             .set(opt)
-            .from(clonedPaper) // Dari elemen CLONE yang ada di (0,0)
+            .from(clonedPaper)
             .toCanvas()
             .toPdf()
             .get('pdf')
@@ -171,9 +164,7 @@ function generatePDF() {
             })
             .save()
             .then(function () {
-                // Bersihkan
                 if (document.body.contains(printContainer)) document.body.removeChild(printContainer);
-                if (document.body.contains(overlay)) document.body.removeChild(overlay);
                 btn.innerText = "Cetak / Simpan PDF";
                 btn.disabled = false;
             })
@@ -181,9 +172,9 @@ function generatePDF() {
                 console.error("Error PDF:", err);
                 alert("Gagal mencetak. Silakan refresh dan coba lagi.");
                 if (document.body.contains(printContainer)) document.body.removeChild(printContainer);
-                if (document.body.contains(overlay)) document.body.removeChild(overlay);
                 btn.innerText = "Cetak / Simpan PDF";
                 btn.disabled = false;
             });
     }, 200);
 }
+

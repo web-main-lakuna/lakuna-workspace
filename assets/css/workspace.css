@@ -130,7 +130,6 @@ body {
     border-radius: 20px;
     padding: 35px 30px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     border: 1px solid rgba(0, 0, 0, 0.03);
     display: flex;
     flex-direction: column;
@@ -148,16 +147,6 @@ body {
     height: 6px;
     background: linear-gradient(90deg, var(--lakuna-purple), var(--lakuna-orange));
     opacity: 0;
-    transition: 0.4s;
-}
-
-.card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(106, 27, 154, 0.12);
-}
-
-.card:hover::before {
-    opacity: 1;
 }
 
 .card-icon {
@@ -169,11 +158,6 @@ body {
     align-items: center;
     justify-content: center;
     margin-bottom: 25px;
-    transition: 0.3s;
-}
-
-.card:hover .card-icon {
-    transform: scale(1.1) rotate(5deg);
 }
 
 .card-icon svg {
@@ -210,20 +194,16 @@ body {
     border-radius: 12px;
     font-weight: 700;
     font-size: 1rem;
-    transition: 0.3s;
 }
 
-.card:hover .card-btn {
+.card-btn:active {
     background: var(--lakuna-dark-purple);
-    gap: 18px;
-    /* Slide arrow effect */
 }
 
 .card-btn svg {
     width: 20px;
     height: 20px;
     fill: white;
-    transition: 0.3s;
 }
 
 /* Coming Soon Card */

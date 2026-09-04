@@ -202,6 +202,13 @@ select:focus {
     gap: 10px;
 }
 
+.contact-item span,
+.contact-item a {
+    text-decoration: none !important;
+    color: white !important;
+    border-bottom: none !important;
+}
+
 .contact-item svg {
     width: 18px;
     height: 18px;
